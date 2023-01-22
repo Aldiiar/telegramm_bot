@@ -13,7 +13,7 @@ from handlers.avto_buying import car_c, car_e, car_s
 
 '''импорт функций формы'''
 from handlers.sell import Form
-from handlers.sell import cansel_handler
+from handlers.sell import cancel_handler
 from handlers.sell import (
     form_start,
     name_process,
@@ -37,8 +37,8 @@ dp.register_message_handler(car_e, Text(equals='E class'))
 dp.register_message_handler(car_s, Text(equals='S class'))
 dp.register_callback_query_handler(sell_command, text='sell_command')
 dp.register_message_handler(form_start, commands=['form'])
-dp.register_message_handler(cansel_handler, state='*', commands='cancel')
-dp.register_message_handler(cansel_handler, Text(equals='cansel', ignore_case=True), state='*')
+dp.register_message_handler(cancel_handler, state='*', commands='cancel')
+dp.register_message_handler(cancel_handler, Text(equals='cancel', ignore_case=True), state='*')
 dp.register_message_handler(name_process, state=Form.name)
 dp.register_message_handler(phone_number_process, state=Form.phone_number)
 dp.register_message_handler(car_brand_process, state=Form.car_brand)

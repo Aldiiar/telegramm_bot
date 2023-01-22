@@ -21,7 +21,7 @@ class Form(StatesGroup):
     address = State()
 
 
-async def cansel_handler(message: types.Message, state: FSMContext):
+async def cancel_handler(message: types.Message, state: FSMContext):
     current_state = await state.get_state()
     if current_state is None:
         return
