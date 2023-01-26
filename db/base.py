@@ -2,8 +2,8 @@ import sqlite3
 from pathlib import Path
 
 def init():
-    global db
-    global cur
+    global db, cur
+    # global cur
     DB_NAME = 'db.sqlite3'
     MAIN_PATH = Path(__file__).parent.parent
     db = sqlite3.connect(MAIN_PATH / DB_NAME)
@@ -87,15 +87,17 @@ def create_clients(data):
         name,
         phone_number,
         product_id
-        ) VALUES ('name2', 'phone_number2', 'product_id')'''
-    )
+        ) VALUES (:name,:phone_number,:product_id)''',
+                {'name': data['name2'],
+                'phone_number': data['phone_number2'],
+                'product_id': data['product_id']})
     db.commit()
 
 
-# populate_products()
 init()
 create_table2()
 create_table()
+# populate_products()
 get_products()
 
 
