@@ -1,15 +1,18 @@
-from aiogram import Bot, Dispatcher, executor
-from dotenv import load_dotenv
-from os import getenv
+from aiogram import executor
+# from os import getenv
 from aiogram.dispatcher.filters import Text
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from config import dp
+
 
 '''импорт функций'''
 from handlers.answer import qwerty
+from handlers.reminder import remind_command
+from handlers.reminder import schedule
 from handlers.start import start_command
 from handlers.buy import buy_command
 from handlers.sell import sell_command
 from handlers.avto_buying import car_c, car_e, car_s
+
 
 '''импорт функций формы продать'''
 from handlers.sell import Form
@@ -45,12 +48,6 @@ create_table2
 )
 
 
-
-load_dotenv()
-bot = Bot(getenv('BOT_TOKEN'))
-storage = MemoryStorage()
-dp = Dispatcher(bot, storage=storage)
-
 async def startup(_):
     """
         запускаем дополнительные сторонние сервисы
@@ -58,6 +55,8 @@ async def startup(_):
     init()
     create_table()
     create_table2()
+
+
 
 dp.register_message_handler(start_command, commands=['start'])
 dp.register_callback_query_handler(buy_command, text='buy_command')
@@ -84,6 +83,9 @@ dp.register_callback_query_handler(form_start2, Text(startswith=['form_start2'])
 dp.register_message_handler(name_process2, state=Form2.name2)
 dp.register_message_handler(phone_number_process2, state=Form2.phone_number2)
 dp.register_message_handler(process_done, Text(equals='Да'), state=Form2.done)
+'''напоминалка'''
+dp.register_message_handler(remind_command, commands=['remind'])
+dp.register_message_handler(schedule, Text(startswith='напомни'))
 dp.register_message_handler(qwerty)
 
 
