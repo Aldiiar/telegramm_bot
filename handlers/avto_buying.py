@@ -8,18 +8,13 @@ def buy_kb(product_id):
 
     return car_kb
 
-c_class1 = get_products()[0]
-c_class2 = get_products()[1]
-e_class1 = get_products()[2]
-e_class2 = get_products()[3]
-s_class1 = get_products()[4]
-s_class2 = get_products()[5]
-
 
 async def car_c(message: types.Message):
     '''
     СПИСОК АBTО
     '''
+    c_class1 = get_products()[0]
+    c_class2 = get_products()[1]
     await message.answer(text='Все автомобили класса -С-')
     await message.answer_photo(open(f'{c_class1[4]}', 'rb'),
                                caption=f'Марка: {c_class1[1]}\n'
@@ -37,6 +32,8 @@ async def car_e(message: types.Message):
     '''
     СПИСОК АBTО
     '''
+    e_class1 = get_products()[2]
+    e_class2 = get_products()[3]
     await message.answer(text='Все автомобили класса -E-')
     await message.answer_photo(open(f'{e_class1[4]}', 'rb'),
                                caption=f'Марка: {e_class1[1]}\n'
@@ -54,6 +51,8 @@ async def car_s(message: types.Message):
     '''
     СПИСОК АBTО
     '''
+    s_class1 = get_products()[4]
+    s_class2 = get_products()[5]
     await message.answer(text='Все автомобили класса -S-')
     await message.answer_photo(open(f'{s_class1[4]}', 'rb'),
                                caption=f'Марка: {s_class1[1]}\n'
