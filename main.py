@@ -1,5 +1,4 @@
 from aiogram import executor
-# from os import getenv
 from aiogram.dispatcher.filters import Text
 from config import dp
 
@@ -82,7 +81,6 @@ if __name__ == '__main__':
     dp.register_message_handler(cancel_handler2, state='*', commands='cancel')
     dp.register_message_handler(cancel_handler2, Text(equals='cancel', ignore_case=True), state='*')
     dp.register_message_handler(name_process2, Text(equals='Нет'), state=Form2.done)
-    # dp.register_message_handler(form_start2, commands=['form2'])
     dp.register_callback_query_handler(form_start2, Text(startswith=['form_start2']))
     dp.register_message_handler(name_process2, state=Form2.name2)
     dp.register_message_handler(phone_number_process2, state=Form2.phone_number2)
@@ -93,6 +91,3 @@ if __name__ == '__main__':
     dp.register_message_handler(qwerty)
 
     executor.start_polling(dp, skip_updates=True, on_startup=startup)
-
-# if __name__ == '__main__':
-#     executor.start_polling(dp, skip_updates=True, on_startup = startup)
