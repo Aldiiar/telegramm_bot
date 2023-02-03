@@ -12,6 +12,7 @@ from handlers.start import start_command
 from handlers.buy import buy_command
 from handlers.sell import sell_command
 from handlers.avto_buying import car_c, car_e, car_s
+from webparsing.answer_cars import show_cars
 
 
 '''импорт функций формы продать'''
@@ -47,6 +48,13 @@ create_table,
 create_table2
 )
 
+from webparsing.data_cars_parsing import (
+init1,
+create_table_cars
+)
+
+from webparsing.parsing import get_cars
+
 import asyncio
 async def startup(_):
     """
@@ -56,12 +64,15 @@ async def startup(_):
     create_table()
     create_table2()
     asyncio.create_task(schedule())
+    init1()
+    create_table_cars()
+    get_cars()
 
 
 if __name__ == '__main__':
-    # executor.start_polling(dp, skip_updates=True, on_startup = startup)
 
     dp.register_message_handler(start_command, commands=['start'])
+    dp.register_message_handler(show_cars, commands=['cars'])
     dp.register_callback_query_handler(buy_command, text='buy_command')
     dp.register_message_handler(car_c, Text(equals='C class'))
     dp.register_message_handler(car_e, Text(equals='E class'))
